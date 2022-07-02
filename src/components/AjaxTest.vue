@@ -1,107 +1,92 @@
 <template>
-  <div>
-    <div class="jsInsert" style="border-style: solid; word-wrap: break-word">{{ jsInsertContent }}</div>
-    <br />
-    <br />
-    <div ref="formTable">
-      <div>
-        requestMethod:<br />
-        <label for="requestMethod">
-          <input ref="requestMethod" class="jsInsert" type="text" />
-        </label>
-      </div>
-      <div>
-        requestURL:<br />
-        <label for="requestURL">
-          <input ref="requestURL" class="jsInsert" type="text" />
-        </label>
+  <div style="width: 100%; display: flex; flex-direction: row; justify-content: center">
+    <div style="flex-grow: 0.9">
+      <div class="foxyInputColor jsInsertBox" style="width: 100%">
+        {{ jsInsertContent }}
       </div>
       <br />
       <br />
-      <div>
-        requsetInput:<br />
-        <textarea
-          ref="requestInput"
-          class="jsInsert"
-          type="text"
-          style="width: 100%; height: 500px"
-        ></textarea>
+      <div ref="formTable" style="width: 100%">
+        <div>
+          requestMethod:<br />
+          <label for="requestMethod">
+            <input id="requestMethod" v-model="requestMethod" class="foxyInputColor" type="text" />
+          </label>
+        </div>
+        <br />
+        <div>
+          requestURL:<br />
+          <label for="requestURL">
+            <input id="requestURL" v-model="requestURL" class="foxyInputColor" type="text" />
+          </label>
+        </div>
+        <br />
+        <div>
+          requsetInput:<br />
+          <textarea
+            v-model="requestInput"
+            class="foxyInputColor"
+            type="text"
+            style="height: 500px"
+          ></textarea>
+        </div>
+        <br />
+        <br />
+        <button title="发送请求" class="mySubmitBtn" style="width: auto" @click="postForm">发送请求</button>
       </div>
     </div>
-    <br />
-    <br />
-    <button ref="btn1" class="mySubmitBtn" style="width: auto" @onclick="postForm">发送请求</button>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue";
-import { isString } from "is-what";
+import { defineComponent } from "vue";
 import { ajax } from "../utils/ajax_util";
 
 export default defineComponent({
   name: "AjaxTest",
-  setup() {
-    const requestInput = ref<HTMLInputElement>();
-    const requestURL = ref<HTMLInputElement>();
-    const requestMethod = ref<HTMLInputElement>();
-    const btn1 = ref<HTMLButtonElement>();
-    return {
-      requestInput,
-      requestURL,
-      requestMethod,
-      btn1
-    };
-  },
   data() {
     return {
-      jsInsertContent: ""
+      jsInsertContent: "",
+      requestURL: "",
+      requestMethod: "",
+      requestInput: ""
     };
   },
   methods: {
-    getDomStringValue(htmlElement: HTMLElement | undefined): string {
-      if (typeof htmlElement === "undefined") {
-        throw Error("Can not get value from undefined.");
-      }
-
-      const defaultResult = "";
-      let tmpVal: any;
-      if (htmlElement instanceof HTMLInputElement) {
-        tmpVal = htmlElement.value;
-      } else if (htmlElement instanceof HTMLElement) {
-        tmpVal = htmlElement.innerText;
-      }
-
-      return isString(tmpVal) ? tmpVal : defaultResult;
-    },
     postForm() {
+      console.log("postForm exec...");
       const myself = this;
-      const jsonData = myself.getDomStringValue(myself.requestInput);
-      ajax({
-        url: myself.getDomStringValue(myself.requestURL),
-        type: myself.getDomStringValue(myself.requestMethod),
-        data: jsonData,
-        timeout: 50000, // 5秒超时
-        contentType: "application/json;charset=utf-8",
-        ontimeout: (event) => {
-          console.log(event);
-          myself.jsInsertContent = "请求超时。";
-        }
-      }).then(
-        (xhr: XMLHttpRequest) => {
-          const recvData = xhr.responseText;
-          console.log(recvData);
-          // 服务器返回响应，根据响应结果，分析是否请求成功
-          const testJsonStr = '{"flag":false,"StudentID":"1","CourseID":"1","score":"80"}';
-          const recvDataObj = JSON.parse(recvData);
-          console.log(recvDataObj.success);
-          myself.jsInsertContent = JSON.stringify(recvDataObj);
-        },
-        (e) => {
-          console.log(e);
-          myself.jsInsertContent = "请求异常。";
-        }
-      );
+      const jsonData = myself.requestInput;
+      try {
+        ajax({
+          url: myself.requestURL,
+          type: myself.requestMethod,
+          data: jsonData,
+          timeout: 50000, // 5秒超时
+          contentType: "application/json;charset=utf-8",
+          ontimeout: (event) => {
+            console.log(event);
+            myself.jsInsertContent = "请求超时。";
+          }
+        }).then(
+          (xhr: XMLHttpRequest) => {
+            const recvData = xhr.responseText;
+            console.log(recvData);
+            // 服务器返回响应，根据响应结果，分析是否请求成功
+            const testJsonStr = '{"flag":false,"StudentID":"1","CourseID":"1","score":"80"}';
+            const recvDataObj = JSON.parse(recvData);
+            console.log(recvDataObj.success);
+            myself.jsInsertContent = JSON.stringify(recvDataObj);
+          },
+          (xhr: XMLHttpRequest) => {
+            console.log(xhr.readyState);
+            myself.jsInsertContent = "请求异常。";
+          }
+        );
+      } catch (e) {
+        console.error(e);
+        myself.jsInsertContent = "请求异常。";
+      }
     }
   }
 });
@@ -111,5 +96,45 @@ export default defineComponent({
 input,
 textarea {
   width: 100%;
+  background-color: transparent;
+  border-style: solid;
+  border-color: blue;
+  border-radius: 15px;
+  padding: 15px;
+  font-size: larger;
+  box-shadow: none;
+}
+
+.jsInsertBox {
+  border-style: solid;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.foxyInputColor {
+  color: orangered;
+}
+
+.mySubmitBtn {
+  border-style: solid;
+  background-color: transparent;
+  color: #00b0ff;
+}
+
+.mySubmitBtn:hover {
+  border-style: outset;
+  background-color: #00b0ff;
+  color: white;
+}
+
+.mySubmitBtn,
+.mySubmitBtn:hover {
+  font-family: "楷体", serif;
+  font-size: 2em;
+  width: 80%;
+  height: auto;
+  border-color: #00b0ff;
+  border-radius: 25px;
+  box-shadow: none;
 }
 </style>

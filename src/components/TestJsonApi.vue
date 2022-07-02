@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="jsInsert" class="jsInsert" style="border-style: solid; word-wrap: break-word"></div>
+    <div id="jsInsert" class="foxyInputColor" style="border-style: solid; word-wrap: break-word"></div>
     <div style="position: center; vertical-align: center">
       <button @click="btnClick">Click me</button>
     </div>
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style scoped>
-.jsInsert {
+.foxyInputColor {
   color: orangered;
 }
 </style>

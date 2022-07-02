@@ -116,14 +116,14 @@ export class AjaxManual {
     // xhr.responseText,xhr.responseXML  获得字符串形式的响应数据或者XML形式的响应数据
     // 接收 HTTP 响应
     // 使用 then 关键词来确保顺序执行
-    return new Promise((resolve: (xhr: XMLHttpRequest) => any, reject: (status: number) => any) => {
+    return new Promise((resolve: (xhr: XMLHttpRequest) => any, reject: (xhr: XMLHttpRequest) => any) => {
       myself.xhr.onreadystatechange = () => {
         if (myself.xhr.readyState === 4) {
           const status = myself.xhr.status;
           if ((status >= 200 && status < 300) || status === 304) {
             resolve(myself.xhr);
           } else {
-            reject(status);
+            reject(myself.xhr);
           }
         }
       };
