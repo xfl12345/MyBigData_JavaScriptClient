@@ -95,13 +95,13 @@ export default defineComponent({
 <style scoped>
 input,
 textarea {
-  width: 100%;
+  width: 90%;
   background-color: transparent;
   border-style: solid;
   border-color: blue;
   border-radius: 15px;
   padding: 15px;
-  font-size: larger;
+  font-size: xx-large;
   box-shadow: none;
 }
 
