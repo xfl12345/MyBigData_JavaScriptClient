@@ -11,6 +11,7 @@ import App from "./App.vue";
 
 import AjaxTest from "./components/AjaxTest.vue";
 import HelloWorld from "./components/HelloWorld.vue";
+import IndexPage from "./components/IndexPage.vue";
 
 const app = createApp(App);
 
@@ -21,7 +22,8 @@ const store = createStore({
 app.use(store);
 type routeNode = Array<RouteRecordRaw>;
 const routes: routeNode = [
-  { path: "/", component: HelloWorld, props: { msg: "Hello Vue 3 + TypeScript + Vite" } },
+  { path: "/", component: IndexPage },
+  { path: "/hello-world", component: HelloWorld, props: { msg: "Hello Vue 3 + TypeScript + Vite" } },
   { path: "/ajax-test", component: AjaxTest }
 ];
 const router = createRouter({
