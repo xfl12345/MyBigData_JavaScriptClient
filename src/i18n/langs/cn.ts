@@ -1,7 +1,6 @@
 // cn.mjs
 
 // eslint-disable-next-line import/no-unresolved
-import zhLocale from "element-plus/lib/locale/lang/zh-CN";
 
 export const cn = {
   message: {
