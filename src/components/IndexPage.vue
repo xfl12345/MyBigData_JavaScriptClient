@@ -1,5 +1,5 @@
 <template>
-  <div ref="templateRoot" class="templateRootStyle" :style="bgStyle"></div>
+  <div ref="templateRoot" class="templateRootStyle" :style="{ backgroundImage: cssBgImgCode }"></div>
 </template>
 
 <script lang="tsx">
@@ -8,9 +8,9 @@ import { defineComponent, PropType, ref } from "vue";
 export default defineComponent({
   name: "IndexPage",
   props: {
-    staticResDir: {
+    bgImgURL: {
       type: String as PropType<string>,
-      default: "./static"
+      default: "./static/pic/yourname_dusk.jpg"
     }
   },
   setup() {
@@ -23,17 +23,14 @@ export default defineComponent({
     return {};
   },
   computed: {
-    bgImgURL(): string {
+    // 背景图片 CSS background-image: url (?)
+    cssBgImgCode(): string {
       const myself = this;
-      return myself.staticResDir + "/pic/yourname_dusk.jpg";
-    },
-    bgStyle(): any {
-      const myself = this;
-      return {
-        "background-image": `url('${myself.bgImgURL}')`,
-        "background-size": "contain"
-      };
+      return `url('${myself.bgImgURL}')`;
     }
+  },
+  mounted() {
+    const myself = this;
   }
 });
 </script>
@@ -42,5 +39,7 @@ export default defineComponent({
 .templateRootStyle {
   width: 100%;
   height: 100%;
+  background-size: 100% auto;
+  background-repeat: repeat-y;
 }
 </style>
