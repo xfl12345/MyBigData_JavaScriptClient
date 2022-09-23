@@ -68,9 +68,9 @@ export default defineConfig({
     // 为开发服务器配置自定义代理规则
     proxy: {
       "/backend": {
-        target: "http://localhost:8081/mybigdata",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/backend/, "")
+        target: "http://localhost:8081/mybigdata/backend",
+        changeOrigin: true
+        // rewrite: (path) => path.replace(/^\/backend/, "")
       }
       // "/druid": {
       //   target: "http://localhost:8081/druid",
