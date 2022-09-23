@@ -58,7 +58,6 @@
     "rollup-plugin-copy": "^3.4.0",
     "typescript": "^4.7.4",
     "vite": "^3.0.4",
-    "vite-plugin-babel": "^1.1.0",
     "vite-plugin-eslint": "^1.7.0",
     "vite-plugin-files-copy": "^2.1.2",
     "vite-plugin-require": "^1.0.1",
