@@ -60,6 +60,9 @@ export default defineConfig({
   },
   base: "./",
   server: {
+    // hmr: {
+    //   overlay: false
+    // },
     // open: true, // 在服务器启动时自动在浏览器中打开应用程序
     // //host: 'localhost',  // 指定服务器主机名
     // // host: '0.0.0.0',
