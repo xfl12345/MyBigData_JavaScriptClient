@@ -2,9 +2,11 @@
 
 // import elementUILocale from "element-plus/lib/locale";
 import { createI18n } from "vue-i18n";
-import { cn } from "./langs";
+import index from "./langs";
 
 export const i18n = createI18n({
-  locale: localStorage.lang || cn
+  messages: index,
+  locale: localStorage.lang,
+  fallbackLocale: "cn"
 });
 // elementUILocale.i18n((key, value) => i18n.t(key, value));

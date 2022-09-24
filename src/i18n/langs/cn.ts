@@ -9,6 +9,7 @@ export const cn = {
   word: {
     id: "ID",
     minimum: "最小值",
-    maximum: "最大值"
+    maximum: "最大值",
+    mybigdata: "我的大数据"
   }
 };
