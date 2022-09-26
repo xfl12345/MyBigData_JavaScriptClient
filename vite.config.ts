@@ -4,7 +4,9 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import CopyPlugin from "vite-plugin-files-copy";
 import eslintPlugin from "vite-plugin-eslint";
-import { resolve } from "path";
+import { resolve, basename } from "path";
+import postcssPresetEnv from "postcss-preset-env";
+// import postcssNested from 'postcss-nested'
 
 function pathResolve(dir) {
   return resolve(__dirname, ".", dir);
@@ -43,6 +45,22 @@ export default defineConfig({
     //   targets: ["last 1 version", "> 1%", "ie 11"]
     // })
   ],
+  css: {
+    modules: {
+      scopeBehaviour: "global",
+      generateScopedName: function (name, filename, css) {
+        const i = css.indexOf("." + name);
+        const line = css.substr(0, i).split(/[\r\n]/).length;
+        const file = basename(filename, ".css");
+
+        return file + "_" + line + "_" + name;
+      }
+    },
+    // postcss: {
+    //   plugins: [postcssPresetEnv]
+    // },
+    postcss: "postcss-preset-env"
+  },
   esbuild: {
     jsxFactory: "h",
     jsxFragment: "Fragment",

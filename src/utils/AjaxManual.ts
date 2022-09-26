@@ -1,5 +1,5 @@
-import { isUndefinedOrNull } from "./isUndefinedOrNull";
-import { isDefinedAndNotNull } from "./isDefinedAndNotNull";
+import { isUndefinedOrNull } from "./IsUndefinedOrNull";
+import { isDefinedAndNotNull } from "./IsDefinedAndNotNull";
 
 export interface AjaxOptions {
   url: string;
