@@ -1,8 +1,22 @@
 <template>
-  <div ref="templateRoot" class="templateRootStyle">
-    <div v-if="calcDone" ref="columnCenterBox" class="columnCenterBox">
-      <div ref="rowCenterBox" class="rowCenterBox">
-        <div ref="centerBox" class="centerBox">
+  <div
+    ref="templateRoot"
+    style="
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    "
+  >
+    <div
+      v-if="calcDone"
+      ref="columnCenterBox"
+      style="background-color: transparent; display: flex; flex-direction: column; justify-content: center"
+    >
+      <div ref="rowCenterBox" style="background-color: transparent">
+        <div ref="centerBox" style="background-color: transparent; flex-grow: 1">
           <slot name="contentBox">
             <div></div>
           </slot>
@@ -93,31 +107,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.templateRootStyle {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.columnCenterBox {
-  /*flex-grow: 0;*/
-  /*background-color: transparent;*/
-  /*background-color: blue;*/
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.rowCenterBox {
-  /*flex-grow: 0;*/
-  /*background-color: transparent;*/
-  display: flex;
-}
-
-.centerBox {
-  flex-grow: 1;
-}
-</style>
+<style scoped></style>

@@ -26,8 +26,6 @@
             background-color: rgba(255, 255, 255, 0.68);
             border-radius: 25px;
             padding: 25px;
-            display: flex;
-            flex-direction: column;
           "
         >
           <div>
@@ -36,8 +34,8 @@
             }}</span>
           </div>
           <br />
-          <div style="flex-basis: 500px">
-            <PreloadSearchBox></PreloadSearchBox>
+          <div style="width: 500px">
+            <PreloadSearchBox />
           </div>
         </div>
       </template>
@@ -91,11 +89,11 @@ export default defineComponent({
 
 <style scoped>
 .broderBreath {
-  animation: load 1.5s infinite alternate;
+  /*animation: load 1.5s infinite alternate;*/
 }
 
 .broderBreath:nth-child(1) {
-  animation-delay: -0.25s;
+  /*animation-delay: -0.25s;*/
 }
 
 @keyframes load {
