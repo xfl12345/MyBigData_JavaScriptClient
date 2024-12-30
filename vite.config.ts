@@ -88,8 +88,9 @@ export default defineConfig({
     port: 3000, // 指定服务器端口
     // 为开发服务器配置自定义代理规则
     proxy: {
-      "/backend": {
-        target: "http://localhost:8081/mybigdata/",
+      "/backend/": {
+        // target: "http://mybigdata.xfl12345.cc/",
+        target: "http://127.0.0.1:8880/",
         changeOrigin: true
         // rewrite: (path) => path.replace(/^\/backend/, "")
       }
